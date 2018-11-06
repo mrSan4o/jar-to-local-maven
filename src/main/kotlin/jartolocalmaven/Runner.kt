@@ -1,13 +1,13 @@
 package jartolocalmaven
 
 import java.io.BufferedReader
+import java.io.File
 import java.io.InputStreamReader
 
 
 fun main(args: Array<String>) {
-    var dep: Dependency = Dependency.empty()
-    var packaging = "jar"
-    var file = ""
+
+    val deps: MutableList<DependencyUpload> = ArrayList()
 
     println("Parse arguments...")
     for (i in 0 until args.size) {
@@ -17,42 +17,81 @@ fun main(args: Array<String>) {
         val name = split[0]
         val value = split[1]
 
-        if ("dep" == name){
-            dep = parseFromString(value)
+        var dep: Dependency = Dependency.empty()
+        var packaging = "jar"
+        var file = ""
+
+        when (name) {
+            "dep" -> {
+                if (dep.valid()) {
+                    throw IllegalArgumentException("dependency already specified")
+                }
+                dep = parseFromString(value)
+            }
+            "packaging" -> {
+                packaging = value
+            }
+            "file" -> {
+                file = value
+            }
+            "fromFile" -> {
+                val f = File(value)
+                if (!f.exists()){
+                    throw IllegalStateException("File config $f NOT EXIST")
+                }
+                f.forEachLine{ it -> run {
+                    val parts = it.split('=')
+                    val depPath = parts[0]
+                    val jarPath = parts[1]
+
+                    deps.add(DependencyUpload(parseFromString(depPath), "jar", jarPath))
+
+                }}
+            }
         }
-        if ("packaging" == name){
-            packaging = value
-        }
-        if ("file" == name){
-            file = value
+
+        if (dep.valid() && file.isNotBlank() && packaging.isNotBlank()) {
+            deps.add(DependencyUpload(dep, packaging, file))
         }
     }
 
-    println("detect $dep")
+    println("detect $deps")
 
-    if (!dep.valid()){
-        throw IllegalArgumentException("No [dep] in arguments")
-    }
-    if (file.isBlank()){
-        throw IllegalArgumentException("No [file] in arguments")
+    for (depUpload in deps) {
+        val dep = depUpload.dep
+        val file = depUpload.file
+
+
+        if (!dep.valid()){
+            throw IllegalArgumentException("No [dep] in arguments")
+        }
+        if (file.isBlank()){
+            throw IllegalArgumentException("No [file] in arguments")
+        }
+
+        runCommand("mvn install:install-file " +
+                "-Dfile=${file} " +
+                "-DgroupId=${dep.groupId} " +
+                "-DartifactId=${dep.artifactId} " +
+                "-Dversion=${dep.version} " +
+                "-Dpackaging=${depUpload.packaging} " +
+                "-DgeneratePom=true")
     }
 
-    runCommand("mvn install:install-file " +
-            "-Dfile=${file} " +
-            "-DgroupId=${dep.groupId} " +
-            "-DartifactId=${dep.artifactId} " +
-            "-Dversion=${dep.version} " +
-            "-Dpackaging=$packaging " +
-            "-DgeneratePom=true")
+
 }
+
 
 fun parseFromString(value: String): Dependency {
-    val split = value.split(':')
-    if (split.size != 3) {
-        throw IllegalArgumentException("Error path value : $value")
-    }
-    return Dependency(split[0], split[1], split[2])
+    return DependencyParser.parseFromString(value)
 }
+
+class DependencyUpload(
+        val dep: Dependency,
+        val packaging: String,
+        val file: String
+
+)
 
 class Dependency(
         val groupId: String,
