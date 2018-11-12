@@ -10,6 +10,7 @@
     <option name="COVERAGE_SETTINGS" />
     <option name="TEST_STATUS_ENABLED" value="true" />
     <option name="TEST_STATUS_SHOW_SUCCESSFUL" value="false" />
+    <option name="POSTPONE_SUITABLE_CONFIGURATIONS_SEARCH" value="false" />
     <option name="ARTIFACTS_BUILD_TYPE_IDS" />
     <option name="PERFORM_COMMIT_IF_SUCCESSFUL" value="true" />
     <option name="PERFORM_COMMIT_IF_NO_NEW_FAILED_TESTS" value="false" />
@@ -23,14 +24,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bfae83d7-369c-4dee-ad86-b16998e1a9cb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/jartolocalmaven/DependencyParser.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/jartolocalmaven/DependencyParserTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/jartolocalmaven/DependencyParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/jartolocalmaven/DependencyParser.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/jartolocalmaven/Runner.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/jartolocalmaven/Runner.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jartolocalmaven/Dependency$Companion.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jartolocalmaven/Dependency$Companion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jartolocalmaven/Dependency.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jartolocalmaven/Dependency.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jartolocalmaven/RunnerKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jartolocalmaven/RunnerKt.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -40,6 +36,20 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="FUSProjectUsageTrigger">
     <session id="310433631">
       <usages-collector id="statistics.lifecycle.project">
@@ -48,31 +58,39 @@
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.13" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.17" value="1" />
+          <entry key="project.open.time.18" value="1" />
+          <entry key="project.open.time.34" value="1" />
+          <entry key="project.open.time.39" value="1" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="kt" value="1472" />
+          <entry key="kt" value="1537" />
+          <entry key="sql" value="20" />
           <entry key="xml" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Kotlin" value="1472" />
+          <entry key="Kotlin" value="1537" />
+          <entry key="Scratch" value="20" />
           <entry key="XML" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="java" value="1" />
-          <entry key="kt" value="3" />
+          <entry key="kt" value="4" />
+          <entry key="sql" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JAVA" value="1" />
-          <entry key="Kotlin" value="3" />
+          <entry key="Kotlin" value="4" />
+          <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
@@ -86,8 +104,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/jartolocalmaven/Runner.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1049">
-              <caret line="92" selection-start-line="92" selection-end-line="92" />
+            <state relative-caret-position="261">
+              <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
               <folding>
                 <element signature="e#25#107#0" expanded="true" />
               </folding>
@@ -98,8 +116,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/jartolocalmaven/DependencyParser.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="12" column="1" lean-forward="true" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+            <state relative-caret-position="210">
+              <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -107,8 +125,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/kotlin/jartolocalmaven/DependencyParserTest.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+            <state relative-caret-position="405">
+              <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
               <folding>
                 <element signature="e#25#72#0" expanded="true" />
               </folding>
@@ -140,8 +158,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/jartolocalmaven/DependencyParser.kt" />
         <option value="$PROJECT_DIR$/src/test/kotlin/jartolocalmaven/DependencyParserTest.kt" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/cf383498-1c25-46f4-a172-a6009f8f51ab/console.sql" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/jartolocalmaven/DependencyParser.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/jartolocalmaven/Runner.kt" />
       </list>
     </option>
@@ -199,86 +218,15 @@
       <autoscrollFromSource ProjectPane="true" />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="Course" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="jartolocalmaven" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jar-to-local-maven" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jartolocalmaven" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jar-to-local-maven" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jartolocalmaven" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jar-to-local-maven" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jartolocalmaven" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jar-to-local-maven" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jartolocalmaven" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jar-to-local-maven" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jartolocalmaven" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jar-to-local-maven" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
-              <item name="jartolocalmaven" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jartolocalmaven" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jar-to-local-maven" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jartolocalmaven" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jar-to-local-maven" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jartolocalmaven" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jar-to-local-maven" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
-              <item name="jartolocalmaven" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jartolocalmaven" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="oracle" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="database.console.LAST_STATE" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/kotlin" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="D:/dev_programs/NODE-JS/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -346,7 +294,7 @@
     <configuration name="jartolocalmaven.RunnerKt (file)" type="JetRunConfigurationType" factoryName="Kotlin">
       <module name="jar-to-local-maven" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="fromFile=D:\dev_programs\jar-to-local-maven\config.txt" />
+      <option name="PROGRAM_PARAMETERS" value="config=D:\dev_programs\jar-to-local-maven\config.txt" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PASS_PARENT_ENVS" value="true" />
@@ -411,6 +359,10 @@
       <workItem from="1541163067209" duration="2677000" />
       <workItem from="1541487641409" duration="1903000" />
       <workItem from="1541491509289" duration="3942000" />
+      <workItem from="1541567133767" duration="606000" />
+      <workItem from="1541651822239" duration="3445000" />
+      <workItem from="1541738674046" duration="599000" />
+      <workItem from="1541999085644" duration="1239000" />
     </task>
     <servers />
   </component>
@@ -420,12 +372,12 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8522000" />
+    <option name="totallyTimeSpent" value="14411000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="61" y="-8" width="1867" height="1096" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3508087" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.36196318" />
       <window_info id="Structure" order="1" side_tool="true" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -441,10 +393,11 @@
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Regex Tester" order="9" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.3290461" />
+      <window_info anchor="bottom" id="Database Console" order="11" weight="0.3290461" />
       <window_info anchor="right" id="Palette" order="0" />
       <window_info anchor="right" id="Ant Build" order="1" />
       <window_info anchor="right" id="Remote Host" order="2" />
-      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.32961518" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info anchor="right" id="Maven Projects" order="5" weight="0.32961518" />
     </layout>
@@ -470,27 +423,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/jartolocalmaven/DependencyParser.kt">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/cf383498-1c25-46f4-a172-a6009f8f51ab/console.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="1" lean-forward="true" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+        <state relative-caret-position="63">
+          <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/kotlin/jartolocalmaven/DependencyParserTest.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+        <state relative-caret-position="405">
+          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
           <folding>
             <element signature="e#25#72#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/jartolocalmaven/DependencyParser.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/jartolocalmaven/Runner.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1049">
-          <caret line="92" selection-start-line="92" selection-end-line="92" />
+        <state relative-caret-position="261">
+          <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
           <folding>
             <element signature="e#25#107#0" expanded="true" />
           </folding>

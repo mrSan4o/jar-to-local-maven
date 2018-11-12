@@ -18,7 +18,7 @@ fun main(args: Array<String>) {
         val value = split[1]
 
         var dep: Dependency = Dependency.empty()
-        var packaging = "jar"
+
         var file = ""
 
         when (name) {
@@ -28,13 +28,10 @@ fun main(args: Array<String>) {
                 }
                 dep = parseFromString(value)
             }
-            "packaging" -> {
-                packaging = value
-            }
             "file" -> {
                 file = value
             }
-            "fromFile" -> {
+            "config" -> {
                 val f = File(value)
                 if (!f.exists()){
                     throw IllegalStateException("File config $f NOT EXIST")
@@ -44,14 +41,14 @@ fun main(args: Array<String>) {
                     val depPath = parts[0]
                     val jarPath = parts[1]
 
-                    deps.add(DependencyUpload(parseFromString(depPath), "jar", jarPath))
+                    deps.add(DependencyUpload(parseFromString(depPath), jarPath))
 
                 }}
             }
         }
 
-        if (dep.valid() && file.isNotBlank() && packaging.isNotBlank()) {
-            deps.add(DependencyUpload(dep, packaging, file))
+        if (dep.valid() && file.isNotBlank()) {
+            deps.add(DependencyUpload(dep, file))
         }
     }
 
@@ -70,11 +67,11 @@ fun main(args: Array<String>) {
         }
 
         runCommand("mvn install:install-file " +
-                "-Dfile=${file} " +
+                "-Dfile=\"${file}\" " +
                 "-DgroupId=${dep.groupId} " +
                 "-DartifactId=${dep.artifactId} " +
                 "-Dversion=${dep.version} " +
-                "-Dpackaging=${depUpload.packaging} " +
+                "-Dpackaging=${dep.packaging} " +
                 "-DgeneratePom=true")
     }
 
@@ -88,7 +85,6 @@ fun parseFromString(value: String): Dependency {
 
 class DependencyUpload(
         val dep: Dependency,
-        val packaging: String,
         val file: String
 
 )
@@ -96,7 +92,8 @@ class DependencyUpload(
 class Dependency(
         val groupId: String,
         val artifactId: String,
-        val version: String
+        val version: String,
+        val packaging: String = "jar"
 ) {
     companion object {
         fun empty(): Dependency {
