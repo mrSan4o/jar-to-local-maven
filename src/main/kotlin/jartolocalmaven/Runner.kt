@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
 
     println("Parse arguments...")
     for (i in 0 until args.size) {
-        val a = args.get(i)
+        val a = args[i]
         println("$i : $a")
         val split = a.split("=")
         val name = split[0]
