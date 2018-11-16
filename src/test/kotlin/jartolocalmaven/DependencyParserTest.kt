@@ -7,7 +7,7 @@ class DependencyParserTest {
 
     @Test
     fun testParseFromString() {
-        val dep = DependencyParser.parseFromString("com:test:1.2")
+        val dep = Dependency.parseFromString("com:test:1.2")
 
         assertEquals("com", dep.groupId)
         assertEquals("test", dep.artifactId)

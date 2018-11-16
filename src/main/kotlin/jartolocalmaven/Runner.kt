@@ -8,84 +8,70 @@ import java.util.*
 
 fun main(args: Array<String>) {
 
-
-    println("Parse arguments : ${args.toList().joinToString()}")
-
-    val deps: MutableList<DependencyUpload> = ArrayList()
-    for (i in 0 until args.size) {
-        val a = args[i]
-        println("$i : $a")
-        val split = a.split("=")
-        val name = split[0]
-        val value = split[1]
-
-        var dep: Dependency = Dependency.empty()
-
-        var file = ""
-
-        when (name) {
-            "dep" -> {
-                if (dep.valid()) {
-                    throw IllegalArgumentException("dependency already specified")
-                }
-                dep = parseFromString(value)
-            }
-            "file" -> {
-                file = value
-            }
-            "config" -> {
-                val f = File(value)
-                if (!f.exists()){
-                    throw IllegalStateException("File config $f NOT EXIST")
-                }
-                f.forEachLine{ it -> run {
-                    val parts = it.split('=')
-                    val depPath = parts[0]
-                    val jarPath = parts[1]
-
-                    val dependency = parseFromString(depPath)
-                    check(dependency)
-                    checkFile(jarPath)
-                    deps.add(DependencyUpload(dependency, jarPath))
-
-                }}
-            }
-        }
-
-        if (dep.valid() && file.isNotBlank()) {
-            deps.add(DependencyUpload(dep, file))
-        }
-    }
-
-    if (deps.isEmpty()) {
-        val dep = input("Input dependency <groupId>:<artifactId>:<version>:(optional:<packaging>)")
-        val dependency = parseFromString(dep)
-        check(dependency)
-
-        val path = input("Input file path")
-        checkFile(path)
-        deps.add(DependencyUpload(dependency, path))
-    }
-
-    println("detect $deps")
-
-    for (depUpload in deps) {
-        val dep = depUpload.dep
-        val file = depUpload.file
-
-
-
-
-        runCommand("mvn install:install-file " +
-                "-Dfile=\"${file}\" " +
-                "-DgroupId=${dep.groupId} " +
-                "-DartifactId=${dep.artifactId} " +
-                "-Dversion=${dep.version} " +
-                "-Dpackaging=${dep.packaging} " +
-                "-DgeneratePom=true")
+    val action = input("""Enter action:
+        1 - add
+        2 - remove
+        """)
+    when(action){
+        "1" -> importDependency()
+        "2" -> removeDependency()
+        else -> System.exit(-1)
     }
 
 
+
+}
+
+fun removeDependency() {
+    val dep = input("Input dependency <groupId>:<artifactId>:<version>:(optional:<packaging>)")
+    val dependency = Dependency.parseFromString(dep)
+
+
+    val searchFileByDependency = SearchFileByDependency(mavenRepository())
+
+    val file = searchFileByDependency.find(dependency)
+
+    if (!file.deleteRecursively()){
+        throw RuntimeException("File NOT DELETED $file")
+    }
+    println("File DELETED $file")
+}
+
+fun mavenRepository(): String {
+    val rep = System.getenv().get("M2_REPOSITORY")
+    if (rep!=null){
+        return rep
+    }
+    println("System enviroment M2_REPOSITORY not specified")
+
+    val path = input("Input maven repository path")
+    if (path.isBlank()){
+        val defaultPath = "C:\\Users\\AlekNazarov\\.m2\\repository"
+        println("search in default : $defaultPath")
+        return defaultPath
+    }
+    return path
+}
+
+private fun importDependency() {
+    val dep = input("Input dependency <groupId>:<artifactId>:<version>:(optional:<packaging>)")
+    val dependency = Dependency.parseFromString(dep)
+    checkDependency(dependency)
+
+    val path = input("Input file path")
+    checkFile(path)
+    val dependencyUpload = DependencyUpload(dependency, path)
+
+
+    println("detect $dependencyUpload")
+
+    runCommand("mvn install:install-file " +
+            "-Dfile=\"${dependencyUpload.file}\" " +
+            "-DgroupId=${dependencyUpload.dep.groupId} " +
+            "-DartifactId=${dependencyUpload.dep.artifactId} " +
+            "-Dversion=${dependencyUpload.dep.version} " +
+            "-Dpackaging=${dependencyUpload.dep.packaging} " +
+            "-DgeneratePom=true")
 }
 
 private fun checkFile(path: String) {
@@ -94,7 +80,7 @@ private fun checkFile(path: String) {
     }
 }
 
-private fun check(dependency: Dependency) {
+private fun checkDependency(dependency: Dependency) {
     if (!dependency.valid()) {
         throw RuntimeException("Error dependency $dependency")
     }
@@ -105,40 +91,6 @@ fun input(text: String): String {
     print("$text: ")
 
     return input.nextLine()
-}
-fun parseFromString(value: String): Dependency {
-    return DependencyParser.parseFromString(value)
-}
-
-class DependencyUpload(
-        val dep: Dependency,
-        val file: String
-
-)
-
-class Dependency(
-        val groupId: String,
-        val artifactId: String,
-        val version: String,
-        val packaging: String = "jar"
-) {
-    companion object {
-        fun empty(): Dependency {
-            return Dependency("", "", "")
-        }
-    }
-
-    fun valid(): Boolean {
-        return groupId.isNotEmpty() && artifactId.isNotEmpty() && version.isNotEmpty()
-    }
-
-    override fun toString(): String {
-        if (valid()) {
-            return "$groupId:$artifactId:$version"
-        }else{
-            return "NONE"
-        }
-    }
 }
 
 private fun runCommand(command: String) {
