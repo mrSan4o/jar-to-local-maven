@@ -3,13 +3,15 @@ package jartolocalmaven
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
+import java.util.*
 
 
 fun main(args: Array<String>) {
 
-    val deps: MutableList<DependencyUpload> = ArrayList()
 
-    println("Parse arguments...")
+    println("Parse arguments : ${args.toList().joinToString()}")
+
+    val deps: MutableList<DependencyUpload> = ArrayList()
     for (i in 0 until args.size) {
         val a = args[i]
         println("$i : $a")
@@ -41,7 +43,10 @@ fun main(args: Array<String>) {
                     val depPath = parts[0]
                     val jarPath = parts[1]
 
-                    deps.add(DependencyUpload(parseFromString(depPath), jarPath))
+                    val dependency = parseFromString(depPath)
+                    check(dependency)
+                    checkFile(jarPath)
+                    deps.add(DependencyUpload(dependency, jarPath))
 
                 }}
             }
@@ -52,6 +57,16 @@ fun main(args: Array<String>) {
         }
     }
 
+    if (deps.isEmpty()) {
+        val dep = input("Input dependency <groupId>:<artifactId>:<version>:(optional:<packaging>)")
+        val dependency = parseFromString(dep)
+        check(dependency)
+
+        val path = input("Input file path")
+        checkFile(path)
+        deps.add(DependencyUpload(dependency, path))
+    }
+
     println("detect $deps")
 
     for (depUpload in deps) {
@@ -59,12 +74,7 @@ fun main(args: Array<String>) {
         val file = depUpload.file
 
 
-        if (!dep.valid()){
-            throw IllegalArgumentException("No [dep] in arguments")
-        }
-        if (file.isBlank()){
-            throw IllegalArgumentException("No [file] in arguments")
-        }
+
 
         runCommand("mvn install:install-file " +
                 "-Dfile=\"${file}\" " +
@@ -78,7 +88,24 @@ fun main(args: Array<String>) {
 
 }
 
+private fun checkFile(path: String) {
+    if (!File(path).exists()) {
+        throw RuntimeException("File NOT EXIST $path")
+    }
+}
 
+private fun check(dependency: Dependency) {
+    if (!dependency.valid()) {
+        throw RuntimeException("Error dependency $dependency")
+    }
+}
+
+fun input(text: String): String {
+    val input = Scanner(System.`in`)
+    print("$text: ")
+
+    return input.nextLine()
+}
 fun parseFromString(value: String): Dependency {
     return DependencyParser.parseFromString(value)
 }
